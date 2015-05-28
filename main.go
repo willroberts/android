@@ -123,6 +123,8 @@ const (
 	texGopherL
 )
 
+// Returns an array of Sprite textures
+// Can be indexed by name (e.g. texs[texFire])
 func loadTextures() []sprite.SubTex {
 	a, err := app.Open("waza-gophers.jpeg")
 	if err != nil {
