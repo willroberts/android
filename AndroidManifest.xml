@@ -6,7 +6,7 @@
 	android:versionName="1.0">
 
 	<uses-sdk android:minSdkVersion="9" />
-	<application android:label="Sprite" android:hasCode="false" android:debuggable="true" android:icon"@mipmap/gopher.png">
+	<application android:label="Sprite" android:hasCode="false" android:debuggable="true" android:icon="@mipmap/gopher.png">
 	<activity android:name="android.app.NativeActivity"
 		android:label="Sprite"
 		android:configChanges="orientation|keyboardHidden">
