@@ -1,3 +1,29 @@
+// Copyright 2014 The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// An app that demonstrates the sprite package.
+//
+// Note: This demo is an early preview of Go 1.5. In order to build this
+// program as an Android APK using the gomobile tool.
+//
+// See http://godoc.org/golang.org/x/mobile/cmd/gomobile to install gomobile.
+//
+// Get the sprite example and use gomobile to build or install it on your device.
+//
+//   $ go get -d golang.org/x/mobile/example/sprite
+//   $ gomobile build golang.org/x/mobile/example/sprite # will build an APK
+//
+//   # plug your Android device to your computer or start an Android emulator.
+//   # if you have adb installed on your machine, use gomobile install to
+//   # build and deploy the APK to an Android target.
+//   $ gomobile install golang.org/x/mobile/example/sprite
+//
+// Switch to your device or emulator to start the Basic application from
+// the launcher.
+// You can also run the application on your desktop by running the command
+// below. (Note: It currently doesn't work on Windows.)
+//   $ go install golang.org/x/mobile/example/sprite && sprite
 package main
 
 import (
@@ -21,8 +47,9 @@ import (
 var (
 	start     = time.Now()
 	lastClock = clock.Time(-1)
-	eng       = glsprite.Engine()
-	scene     *sprite.Node
+
+	eng   = glsprite.Engine()
+	scene *sprite.Node
 )
 
 func main() {
@@ -33,20 +60,19 @@ func main() {
 }
 
 func draw() {
-	log.Print("In draw loop, can call OpenGL.")
-
 	if scene == nil {
 		loadScene()
 	}
 
-	// Limit to 60fps
 	now := clock.Time(time.Since(start) * 60 / time.Second)
 	if now == lastClock {
+		// TODO: figure out how to limit draw callbacks to 60Hz instead of
+		// burning the CPU as fast as possible.
+		// TODO: (relatedly??) sync to vblank?
 		return
 	}
 	lastClock = now
 
-	// Draw the screen!
 	gl.ClearColor(1, 1, 1, 1)
 	gl.Clear(gl.COLOR_BUFFER_BIT)
 	eng.Render(scene, now)
@@ -64,7 +90,6 @@ func newNode() *sprite.Node {
 }
 
 func loadScene() {
-	// Load textures and base scene
 	texs := loadTextures()
 	scene = &sprite.Node{}
 	eng.Register(scene)
@@ -73,10 +98,8 @@ func loadScene() {
 		{0, 1, 0},
 	})
 
-	// Allocate a *sprite.Node var for reuse
 	var n *sprite.Node
 
-	// Draw some books!
 	n = newNode()
 	eng.SetSubTex(n, texs[texBooks])
 	eng.SetTransform(n, f32.Affine{
@@ -84,7 +107,6 @@ func loadScene() {
 		{0, 36, 0},
 	})
 
-	// Draw some fire!
 	n = newNode()
 	eng.SetSubTex(n, texs[texFire])
 	eng.SetTransform(n, f32.Affine{
@@ -92,9 +114,9 @@ func loadScene() {
 		{0, 72, 144},
 	})
 
-	// Draw some gophers!
 	n = newNode()
 	n.Arranger = arrangerFunc(func(eng sprite.Engine, n *sprite.Node, t clock.Time) {
+		// TODO: use a tweening library instead of manually arranging.
 		t0 := uint32(t) % 120
 		if t0 < 60 {
 			eng.SetSubTex(n, texs[texGopherR])
@@ -123,8 +145,6 @@ const (
 	texGopherL
 )
 
-// Returns an array of Sprite textures
-// Can be indexed by name (e.g. texs[texFire])
 func loadTextures() []sprite.SubTex {
 	a, err := app.Open("waza-gophers.jpeg")
 	if err != nil {
@@ -136,7 +156,6 @@ func loadTextures() []sprite.SubTex {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	t, err := eng.LoadTexture(img)
 	if err != nil {
 		log.Fatal(err)
