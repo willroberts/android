@@ -45,21 +45,42 @@ Install in `/usr/local/go`.
 
 Download and install `gomobile`:
 
-    go get github.com/golang/mobile/cmd/gomobile
+    $ go get github.com/golang/mobile/cmd/gomobile
 
-#### Build go for arm/android
+### Install dependencies
+
+    $ sudo apt-get -y install libgles2-mesa-dev libegl1-mesa-dev
+
+#### Build go for android/arm (and set default CC to android/arm)
 
 Might require NDK toolchain
 
     $ cd $GOROOT/src
-    $ CC_FOR_TARGET=$NDK_ROOT/bin/arm-linux-androideabi-gcc GOOS=android GOARCH=arm GOARM=7 CGO_ENABLED=1 ./make.bash
+    $ CC_FOR_TARGET=$NDK_ROOT/bin/arm-linux-androideabi-gcc GOOS=android GOARCH=arm GOARM=7 CGO_ENABLED=1 ./make.bash --no-clean
 
 ## Testing Your Setup
 
-### Build the `basic` app
+This will download, build, and install the [`basic`](https://godoc.org/golang.org/x/mobile/example/basic) example app.
 
-https://godoc.org/golang.org/x/mobile/example/basic
+### Test the app locally
+
+#### Set CC back to normal
+
+    $ cd $GOROOT/src
+    $ CC_FOR_TARGET=/usr/bin/gcc GOOS=linux GOARCH=amd64 CGO_ENABLED=1 ./make.bash --no-clean
+
+#### Install the app
+
+    $ go install golang.org/x/mobile/example/basic
+    $ basic
+
+### Build the app for Android
+
+    $ go get -d golang.org/x/mobile/example/basic
+    $ gomobile build golang.org/x/mobile/example/basic
 
 ### Push to phone
 
-    ./install basic.apk
+    $ gomobile install golang.org/x/mobile/example/basic
+    - or -
+    $ ./install basic.apk
