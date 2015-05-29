@@ -53,3 +53,13 @@ Might require NDK toolchain
 
     $ cd $GOROOT/src
     $ CC_FOR_TARGET=$NDK_ROOT/bin/arm-linux-androideabi-gcc GOOS=android GOARCH=arm GOARM=7 CGO_ENABLED=1 ./make.bash
+
+## Testing Your Setup
+
+### Build the `basic` app
+
+https://godoc.org/golang.org/x/mobile/example/basic
+
+### Push to phone
+
+    ./install basic.apk

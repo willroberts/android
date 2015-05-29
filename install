@@ -1,0 +1,3 @@
+#!/bin/bash
+TARGET=$1
+/usr/local/android-sdk/platform-tools/adb push "${TARGET}" "/mnt/sdcard/golang/"
