@@ -66,6 +66,11 @@ Haven't made this work yet.
 
 ### Test the app locally
 
+#### Set your CC back to normal (?)
+
+    $ cd $GOROOT/src
+    $ CC_FOR_TARGET= GOOS=linux GOARCH=amd64 ./make.bash
+
 #### Install the app
 
     $ go install golang.org/x/mobile/example/basic
