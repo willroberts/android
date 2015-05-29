@@ -51,7 +51,7 @@ Download and install `gomobile`:
 
     $ sudo apt-get -y install libgles2-mesa-dev libegl1-mesa-dev
 
-#### Build go for android/arm (and set default CC to android/arm)
+#### Build go for android/arm
 
 Might require NDK toolchain
 
@@ -62,12 +62,9 @@ Might require NDK toolchain
 
 This will download, build, and install the [`basic`](https://godoc.org/golang.org/x/mobile/example/basic) example app.
 
+Haven't made this work yet.
+
 ### Test the app locally
-
-#### Set CC back to normal
-
-    $ cd $GOROOT/src
-    $ CC_FOR_TARGET=/usr/bin/gcc GOOS=linux GOARCH=amd64 CGO_ENABLED=1 ./make.bash --no-clean
 
 #### Install the app
 
