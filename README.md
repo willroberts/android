@@ -32,7 +32,9 @@ Install in `/usr/local/go1.4`. You'll need it to build Go 1.5.
 
 #### Go 1.5
 
-Install in `/usr/local/go`.
+Install in `/usr/local/go`. If you already have Go 1.5 installed, go
+ahead and rebuild it anyway (from HEAD of master). Things are being
+fixed rapidly and it's worth the update.
 
 #### Configure environment
 
