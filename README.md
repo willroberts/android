@@ -24,13 +24,15 @@ Download and install each from Google. I've stored them here:
 
 ### Go
 
+Most of this comes from [this doc](https://godoc.org/golang.org/x/mobile/cmd/gomobile).
+
 #### Go 1.4
 
-Install Go 1.4 to `/usr/local/go1.4`. You'll need it to build Go 1.5.
+Install in `/usr/local/go1.4`. You'll need it to build Go 1.5.
 
 #### Go 1.5
 
-Install to `/usr/local/go`.
+Install in `/usr/local/go`.
 
 #### Configure environment
 
