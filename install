@@ -1,2 +1,2 @@
 #!/bin/bash
-/usr/local/android-sdk/platform-tools/adb install android.apk
+adb install -r android.apk
