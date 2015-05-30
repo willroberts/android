@@ -11,6 +11,8 @@ Download and install each from Google. I've stored them here:
     /usr/local/android-sdk
     /usr/local/android-ndk
 
+If you don't want to run things as root, take ownership of these directories.
+
 #### Configure environment
 
     export SDK_ROOT=/usr/local/android-sdk
@@ -20,7 +22,7 @@ Download and install each from Google. I've stored them here:
 
 #### Build the NDK toolchain
 
-    $ $NDK_ROOT/build/tools/make-standalone-toolchain.sh --install-dir=$NDK_ROOT --arch=arm --toolchain=arm-linux-androideabi-4.9 --platform=android-21
+    $ sudo $NDK_ROOT/build/tools/make-standalone-toolchain.sh --install-dir=$NDK_ROOT --arch=arm --toolchain=arm-linux-androideabi-4.9 --platform=android-21
 
 ### Go
 
@@ -64,14 +66,15 @@ Might require NDK toolchain
 
 This will download, build, and install the [`basic`](https://godoc.org/golang.org/x/mobile/example/basic) example app.
 
-Haven't made this work yet.
-
 ### Test the app locally
 
-#### Set your CC back to normal (?)
+#### 
+
+The previous CC_FOR_TARGET setting can cause issues for linux/amd64 builds. Set
+it back to default:
 
     $ cd $GOROOT/src
-    $ CC_FOR_TARGET= GOOS=linux GOARCH=amd64 ./make.bash
+    $ CC_FOR_TARGET= GOOS=linux GOARCH=amd64 ./make.bash --no-clean
 
 #### Install the app
 
@@ -86,5 +89,9 @@ Haven't made this work yet.
 ### Push to phone
 
     $ gomobile install golang.org/x/mobile/example/basic
-    - or -
-    $ ./install basic.apk
+
+## Tools
+
+`build`: build apk file for this project
+
+`install`: copy apk file to /mnd/sdcard/golang on phone
