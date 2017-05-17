@@ -71,7 +71,7 @@ Haven't made this work yet.
 #### Set your CC back to normal (?)
 
     $ cd $GOROOT/src
-    $ CC_FOR_TARGET= GOOS=linux GOARCH=amd64 ./make.bash
+    $ CC_FOR_TARGET= GOOS=linux GOARCH=amd64 ./make.bash --no-clean
 
 #### Install the app
 
