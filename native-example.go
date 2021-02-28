@@ -1,17 +1,18 @@
 package main
 
 import (
-	"log"
-
 	"golang.org/x/mobile/app"
+	"golang.org/x/mobile/event/paint"
 )
 
 func main() {
-	app.Run(app.Callbacks{
-		Draw: draw,
+	app.Main(func(a app.App) {
+		for e := range a.Events() {
+			switch e := a.Filter(e).(type) {
+			case paint.Event:
+				// call opengl here!
+				_ = e
+			}
+		}
 	})
-}
-
-func draw() {
-	log.Print("In draw loop, can call OpenGL.")
 }
